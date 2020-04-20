@@ -8,5 +8,5 @@ if __name__ == "__main__":
     # atm.start_session(atm._id, atm.card_number)
     # atm.start_customer_console()
     # atm.get_action()
-    # deposit_withdrawal
+    # deposit_withdrawal_transfer()
     time.sleep(1)
