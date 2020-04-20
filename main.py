@@ -1,6 +1,7 @@
-import atm
 import time
 
+import atm as atm_library
+
 if __name__ == "__main__":
-    atm = atm.Atm()
+    atm = atm_library.Atm()
     time.sleep(1)
