@@ -52,11 +52,11 @@ class Atm(object):
 
     # def deposit_withdrawal_transfer(self):
     #     if self.action == "deposit":
-    #         continue
+    #         account.deposit()
     #     elif self.action == "withdrawal":
-    #         continue
+    #         account.withdrawal()
     #     elif self.actioin == "transfer":
-    #         continue
+    #         account.transfer()
     #     else:
     #         print("Invalid action, please try again.")
             
