@@ -3,9 +3,10 @@ class Account(object):
     methods.
 
     """
-    # _account_number = 123
-    # _balance = 0
-    # _withdrawal_limit = 400
+    _account_number = None
+    _balance = None
+    _withdrawal_limit = None
+
 
     @property
     def balance(self):
@@ -15,7 +16,13 @@ class Account(object):
             account balance (data type?)
 
         """
-        return self.balance
+        return self._balance
+
+
+    @balance.setter
+    def balance(self, value):
+        self._balance = value
+
 
     def __init__(self, account_number = 123, balance = 0, withdrawal_limit = 400):
         """Creates an account object.
@@ -27,8 +34,9 @@ class Account(object):
 
         """
         self.balance = balance
-        self.account_number = account_number
-        self.withdrawal_limit = withdrawal_limit
+        self._account_number = account_number
+        self._withdrawal_limit = withdrawal_limit
+
 
     def withdrawal(self, withdrawal):
         """Checks if balance is positive, higher than withdrawal amount
@@ -37,7 +45,9 @@ class Account(object):
         the withdrawal. If no, detailed error messages are displayed.
 
         """
-        if self.balance > 0 and self.balance >= withdrawal and withdrawal <= self.withdrawal_limit:
+        if self.balance > 0 and \
+            self.balance >= withdrawal and \
+            withdrawal <= self.withdrawal_limit:
             self.balance -= withdrawal
 
         if self.balance <= 0:
