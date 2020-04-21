@@ -11,7 +11,8 @@ class Customer(object):
 
     def validate_card_id_pin(self, card_id, pin):
         if card_id == self.card_id and pin == self.pin:
-            return self.account_number
+            return self.account_number # or return True if validated?
+            
 
-    def get_customer_info(self, card_id, pin, account_number):
+    def get_customer_info(self, name, card_id, pin, account_number):
         pass
