@@ -52,22 +52,29 @@ class Account(object):
 
         if self.balance <= 0:
             print("You don't have enough funds to complete the transaction." +
-                  f" Your balance is {self.balance}.")
+                  f" Your balance is ${self.balance}.")
         if withdrawal > self.balance:
             print("You can't withdraw more funds than you have available. " +
-                  f"Your balance is {self.balance}.")
+                  f"Your balance is ${self.balance}. You have requested " +
+                  f"${withdrawal}.")
         if withdrawal > 400:
             print("Your withdrawal request has been denied. ATM daily " +
                   "withdrawal limit is $400.00. You have requested " +
-                  f"{withdrawal}.")
+                  f"${withdrawal}.")
         if withdrawal <= 0:
             print("Your withdrawal amount must be a positive number. "
-                  f"{withdrawal} is not valid.")
+                  f"${withdrawal} is not valid.")
 
     def deposit(self, deposit):
-        self.balance += deposit
+        if deposit > 0:
+            self.balance += deposit
+        else:
+            print(f"You may deposit positive amount only. ${deposit} is not" +
+                  " valid.")
 
-if __name__ == "__main__":
-    """Run tests if module is executed by name."""
-    account = Account()
-    print("Balance:", account.balance)
+# if __name__ == "__main__":
+#     """Run tests if module is executed by name."""
+#     account = Account()
+
+
+
