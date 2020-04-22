@@ -29,7 +29,7 @@ class Account(object):
         
         Args:
             account_number (?): Optional for now?
-            balance (?): zero
+            balance (?): $0
             withdrawal_limit (?): $400
 
         """
@@ -47,7 +47,7 @@ class Account(object):
         """
         if self.balance > 0 and \
             self.balance >= withdrawal and \
-            withdrawal <= self.withdrawal_limit:
+            withdrawal <= self._withdrawal_limit:
             self.balance -= withdrawal
 
         if self.balance <= 0:
@@ -70,4 +70,4 @@ class Account(object):
 if __name__ == "__main__":
     """Run tests if module is executed by name."""
     account = Account()
-    # print("Balance:", account.balance)
+    print("Balance:", account.balance)
