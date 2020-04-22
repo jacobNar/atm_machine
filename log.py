@@ -1,16 +1,20 @@
 import sqlite3
 from datetime import datetime
 
+
 DATABASE = "Log.db"
+
 
 class Log(object):
 
-    def save(self, ID_field, entry, error):
-        assert isinstance(ID_field, int), "Credit card/Account number should be an integer."
+    def save(self, entry):
         assert isinstance(entry, str), "The Log text should be a string."
+        fieldID = get_dictionary("SELECT COUNT(*) FROM Log")
+        fieldID = int(fieldID["Rows"][0][0])
+        fieldID += 1
         date_and_time = datetime.now()
-        sql = "INSERT INTO Log('IDField', DateTime, Text, Error) VALUES('"
-        sql = sql + str(ID_field) + "', '" + str(date_and_time) + "', '" + str(entry) + "', '" + str(error) +"');"
+        sql = "INSERT INTO Log('FieldID', DateTime, Text) VALUES('"
+        sql = sql + str(fieldID) + "', '" + str(date_and_time) + "', '" + str(entry) + "');"
         results = execute_sql(sql)
         return results
     
@@ -205,14 +209,8 @@ def display_table(dictionary_of_lists):
 
 
 if __name__ == "__main__":
-    # Credit card number or Account number perhaps?
-    ID_field = 1234123412341234
-
     # The thing that was accessed or changed.
     entry = "Description of changed aspect"
 
-    # Whether or not the entry is an error ('Yes' means error 'no' means the data is valid.)
-    error = "no"
-
-    Log().save(ID_field, entry, error)
+    Log().save(entry)
     Log().display_entry()

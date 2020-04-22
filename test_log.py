@@ -2,9 +2,8 @@ import pytest
 import log
 
 
-ID_field = 95
+FieldID = 95
 entry = "try this"
-error = "no"
 
 
 def test_get_dictionary_valid():
@@ -17,13 +16,13 @@ def test_get_dictionary_invalid():
 
 
 def test_Log_valid():
-    assert log.Log().save(ID_field, entry, error) == "Database found."
+    assert log.Log().save(FieldID, entry) == "Database found."
 
 
 def test_execute_get_sql_valid():
-    assert log.execute_sql("DELETE FROM Log WHERE IDField = 95;") == "Database found."
-    assert log.execute_sql("INSERT INTO Log('IDField', DateTime, Text, Error) VALUES(50, 'someday and time', 'This is gonna show up', 'yes');") == "Database found."
-    assert log.execute_sql("DELETE FROM Log WHERE IDField = 50;") == "Database found."
+    assert log.execute_sql("DELETE FROM Log WHERE FieldID = 95;") == "Database found."
+    assert log.execute_sql("INSERT INTO Log('FieldID', DateTime, Text) VALUES(50, 'someday and time', 'This is gonna show up');") == "Database found."
+    assert log.execute_sql("DELETE FROM Log WHERE FieldID = 50;") == "Database found."
     assert log.execute_sql("Thisisn'tSQL!!!") == "Invalid SQL."
 
 
