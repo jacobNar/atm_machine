@@ -10,5 +10,9 @@ def test_name():
     _customer.name = "Test"
     assert _customer.name == "Test"
 
-def test_validate_card_id_pin(capsys):
-    pass
+def test_validate_card_id_pin():
+    _customer = customer.Customer()
+    customer._pin = '1111'
+    customer._card_id = '1111'
+    assert _customer.validate_card_id_pin('1111', '1111') == True
+

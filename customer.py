@@ -43,3 +43,5 @@ class Customer(object):
         if card_id == self._card_id and pin == self._pin:
             self._is_validated = True
             return True
+        else:
+            return False
