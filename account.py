@@ -7,7 +7,6 @@ class Account(object):
     _balance = None
     _withdrawal_limit = None
 
-
     @property
     def balance(self):
         """Gets account balance.
@@ -18,15 +17,14 @@ class Account(object):
         """
         return self._balance
 
-
     @balance.setter
     def balance(self, value):
         self._balance = value
 
-
-    def __init__(self, account_number = 123, balance = 0, withdrawal_limit = 400):
+    def __init__(self, account_number=123, balance=0,
+                 withdrawal_limit=400):
         """Creates an account object.
-        
+
         Args:
             account_number (?): Optional for now?
             balance (?): $0
@@ -37,7 +35,6 @@ class Account(object):
         self._account_number = account_number
         self._withdrawal_limit = withdrawal_limit
 
-
     def withdrawal(self, withdrawal):
         """Checks if balance is positive, higher than withdrawal amount
         and if withdrawal amount is less than withdrawal limit. If all
@@ -47,8 +44,8 @@ class Account(object):
         """
         if self.balance > 0 and \
             self.balance >= withdrawal and \
-            withdrawal <= self._withdrawal_limit:
-            self.balance -= withdrawal
+                withdrawal <= self._withdrawal_limit:
+                    self.balance -= withdrawal
 
         if self.balance <= 0:
             print("You don't have enough funds to complete the transaction." +
@@ -75,6 +72,3 @@ class Account(object):
 # if __name__ == "__main__":
 #     """Run tests if module is executed by name."""
 #     account = Account()
-
-
-
