@@ -26,9 +26,9 @@ class Account(object):
         """Creates an account object.
 
         Args:
-            account_number (?): Optional for now?
-            balance (?): $0
-            withdrawal_limit (?): $400
+            account_number
+            balance: $0
+            withdrawal_limit: $400
 
         """
         self.balance = balance
