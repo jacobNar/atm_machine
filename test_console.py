@@ -13,7 +13,7 @@ def test_console_get_pin():
         return input_values.pop()
 
     console_library.input = input
-    assert console_library.console_get_pin() == 1111
+    assert console_library.Console.console_get_pin() == 1111
 
 
 def test_invalid_pin_over_four_digits_prints_string(capsys):
@@ -22,7 +22,7 @@ def test_invalid_pin_over_four_digits_prints_string(capsys):
     def input(prompt=None):
         return input_values.pop()
 
-    console_library.input = input
+    console_library.Console.input = input
     captured = capsys.readouterr()
     assert captured.out == ""
 
@@ -33,7 +33,7 @@ def test_invalid_pin_under_four_digits_prints_string(capsys):
     def input(prompt=None):
         return input_values.pop()
 
-    console_library.input = input
+    console_library.Console.input = input
     captured = capsys.readouterr()
     assert captured.out == ""
 
@@ -45,7 +45,7 @@ def test_console_card_identification():
         return input_values.pop()
 
     console_library.input = input
-    assert console_library.console_get_card_identification() == 123412341234
+    assert console_library.Console.console_get_card_identification() == 123412341234
 
 
 def test_console_card_identification_string(capsys):
@@ -55,7 +55,7 @@ def test_console_card_identification_string(capsys):
         return input_values.pop()
 
     console_library.input = input
-    console_library.console_get_card_identification()
+    console_library.Console.console_get_card_identification()
     captured = capsys.readouterr()
     assert captured.out != "Valid card ID!"
 
@@ -63,10 +63,10 @@ def test_console_card_identification_string(capsys):
 def test_console_display_menu_prints_string(capsys):
     input_values = [1]
 
-    def input(prompt=None):
+    def input():
         return input_values.pop()
 
-    console_library.input = input
+    console_library.Console.input = input
     captured = capsys.readouterr()
     assert captured.out == ""
 
