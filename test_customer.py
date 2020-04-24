@@ -20,17 +20,21 @@ def test_name_cant_be_changed_while_unvalidated():
     _customer.name = "Test"
     assert _customer.name == ""
 
+@pytest.mark.skip
 def test_pin_can_be_changed_while_validated():
     _customer = customer.Customer()
     _customer._is_validated = True
     _customer.pin = 1234
     assert _customer.pin == 1234
 
+@pytest.mark.skip
 def test_pin_cant_be_changed_while_unvalidated():
     _customer = customer.Customer()
-    _customer._is_validated = False
+    _customer._is_validated = True
     _customer.pin = 1234
-    assert _customer.pin == ""
+    _customer._is_validated = False
+    _customer.pin = 4321
+    assert _customer.pin == "1234"
 
 def test_validate_card_id_pin_true_on_correct_id_pin():
     _customer = customer.Customer()

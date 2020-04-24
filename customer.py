@@ -1,6 +1,16 @@
 # Customer module to handle customer information such as name, card number, pin, and account number
 
 class Customer(object):
+    """Customer class for ATM
+
+    Att: 
+        name (string): customer first/last name
+        card_id (string): customer card number
+        pin (string): customer pin
+        account_number (string): account number
+        is_validated (bool): card number and pin validation/session
+
+    """
     _name = None
     _card_id = None
     _pin = None
@@ -9,25 +19,32 @@ class Customer(object):
 
     @property
     def name(self):
+        """name accessor function"""
         return self._name
 
     @property
     def is_validated(self):
+        """is_validated accessor function"""
         return self._is_validated
 
-    @property
-    def pin(self):
-        return self._pin
+    # @property
+    # def pin(self):
+    #     """pin accessor function"""
+    #     if self._is_validated == True:
+    #         return self._pin
 
     @name.setter
     def name(self, value):
+        """name accessor function"""
         if self._is_validated == True:
             self._name = value
 
-    @pin.setter
-    def pin(self, value):
-        if self._is_validated == True:
-            self._pin = value
+    # @pin.setter
+    # def pin(self, value):
+    #     """pin mutator function"""
+    #     if self._is_validated == True:
+    #         self._pin = value
+
 
     def logout(self):  # End session: used if data saved to database eventually
         del self
@@ -37,7 +54,7 @@ class Customer(object):
         self._card_id = card_id
         self._pin = pin
         self._account_number = account_number
-        print(f"Customer created. Welcome, {name}!")
+        # print(f"Customer created. Welcome, {name}!")
 
     def validate_card_id_pin(self, card_id, pin):
         if card_id == self._card_id and pin == self._pin:
