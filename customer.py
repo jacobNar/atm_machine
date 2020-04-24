@@ -5,7 +5,7 @@ class Customer(object):
     _card_id = None
     _pin = None
     _account_number = None
-    _is_validated = False
+    _is_validated = False  #session control: logged in with card/pin
 
     @property
     def name(self):
@@ -29,7 +29,7 @@ class Customer(object):
         if self._is_validated == True:
             self._pin = value
 
-    def logout(self):
+    def logout(self):  # End session: used if data saved to database eventually
         del self
         
     def __init__(self, name="", card_id="", pin="", account_number=""):
