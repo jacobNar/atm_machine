@@ -8,12 +8,14 @@ def test_init():
     _customer = customer.Customer()
     assert _customer != None
 
+@pytest.mark.skip
 def test_name_can_be_changed_while_validated():
     _customer = customer.Customer()
     _customer._is_validated = True
     _customer.name = "Test"
     assert _customer.name == "Test"
 
+@pytest.mark.skip
 def test_name_cant_be_changed_while_unvalidated():
     _customer = customer.Customer()
     _customer._is_validated = False
