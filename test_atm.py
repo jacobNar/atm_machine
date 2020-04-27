@@ -1,5 +1,6 @@
 import pytest
 
+
 import atm as atm_library
 
 def test_init():
@@ -15,3 +16,8 @@ def test_display_welcome(capsys):
     atm.display_welcome()
     captured = capsys.readouterr()
     assert "Welcome" in captured.out
+
+def test_blanace():
+    atm = atm_library.Atm()
+
+    assert atm.balance() == None

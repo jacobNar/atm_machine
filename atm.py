@@ -5,16 +5,17 @@
 # import console
 # import operator_panel as operator_panel_library
 # import log
-import account as acount_library
+from account import Account
 # import network as network_library
 # import receipt as receipt_library
 
 class Atm(object):
     _id = "12345"
+    _account = None
 
-    # @property
-    # def id(self):
-    #     return self._id
+    @property
+    def id(self):
+        return self._id
 
     # @property
     # def card_number(self):
@@ -24,13 +25,21 @@ class Atm(object):
     # def card_number(self):
     #     self.card_number = self.read_card()
 
+    @property
+    def balance(self):
+        self._account.balance
+
     def __init__(self):
         print("Atm initialized")
         self.display_welcome()
+        self._account = Account()
 
     def display_welcome(self):
         # console = console_library.Console()
         print("Welcome to our very expensive bank!")
+
+    def deposit(self, deposit):
+        self._account.deposit(deposit)
 
     # def read_card(self):
     #     return console.pin()
