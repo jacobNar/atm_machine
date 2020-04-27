@@ -19,7 +19,7 @@ class Atm(object):
 
     @property
     def balance(self):
-        self._account.balance
+        return self._account.balance
 
     def __init__(self):
         print("Atm initialized")
@@ -31,7 +31,19 @@ class Atm(object):
 
     def deposit(self, deposit):
         self._account.deposit(deposit)
+    
+    def withdrawal(self, withdrawal):
+        self._account.withdrawal(withdrawal)
+    
 
+
+if __name__ == "__main__":
+    """ testing """
+    atm = Atm()
+    atm.deposit(100)
+    print(atm.balance)
+    atm.withdrawal(50)
+    print(atm.balance)
     
             
 
