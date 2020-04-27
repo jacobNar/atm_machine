@@ -2,7 +2,6 @@ import pytest
 import log
 
 
-FieldID = 95
 entry = "try this"
 
 
@@ -16,17 +15,16 @@ def test_get_dictionary_invalid():
 
 
 def test_Log_valid():
-    assert log.Log().save(FieldID, entry) == "Database found."
+    assert log.Log().save(entry) == "Database found."
 
 
 def test_execute_get_sql_valid():
-    assert log.execute_sql("DELETE FROM Log WHERE FieldID = 95;") == "Database found."
-    assert log.execute_sql("INSERT INTO Log('FieldID', DateTime, Text) VALUES(50, 'someday and time', 'This is gonna show up');") == "Database found."
-    assert log.execute_sql("DELETE FROM Log WHERE FieldID = 50;") == "Database found."
+    assert log.execute_sql("DELETE FROM Log WHERE Text = 'try this';") == "Database found."
+    assert log.execute_sql("INSERT INTO Log('FieldID', DateTime, Text) VALUES(50000000000, '4/22/2020', 'This is gonna show up');") == "Database found."
+    assert log.execute_sql("DELETE FROM Log WHERE FieldID = '50000000000';") == "Database found."
     assert log.execute_sql("Thisisn'tSQL!!!") == "Invalid SQL."
 
 
 def test_execute_sql_invalid():
     with pytest.raises(AssertionError):
         log.execute_sql(13)
-

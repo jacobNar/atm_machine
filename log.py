@@ -8,6 +8,17 @@ DATABASE = "Log.db"
 class Log(object):
 
     def save(self, entry):
+        """Saves a string to a database with an incrementing ID and a datetime.
+
+        Args:
+            entry: The string to be saved to the database.
+
+        Returns:
+            Either 'Database found.' or 'Database missing.' depending on the result.
+
+        Raises:
+            AssertionError: If the entry text is not a string.
+        """
         assert isinstance(entry, str), "The Log text should be a string."
         fieldID = get_dictionary("SELECT COUNT(*) FROM Log")
         fieldID = int(fieldID["Rows"][0][0])
@@ -18,7 +29,16 @@ class Log(object):
         results = execute_sql(sql)
         return results
     
+    
     def display_entry(self):
+        """Displays all the records of the log.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         sql = "SELECT * from Log"
         list_of_dictionaries = get_dictionary(sql)
         print("\nThe log entries are:\n")
@@ -209,8 +229,6 @@ def display_table(dictionary_of_lists):
 
 
 if __name__ == "__main__":
-    # The thing that was accessed or changed.
     entry = "Description of changed aspect"
-
     Log().save(entry)
     Log().display_entry()
