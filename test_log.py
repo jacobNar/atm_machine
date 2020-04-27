@@ -2,7 +2,7 @@ import pytest
 import log
 
 
-entry = "try this"
+entry = "Example test string"
 
 
 def test_get_dictionary_valid():
