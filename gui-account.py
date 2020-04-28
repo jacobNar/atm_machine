@@ -58,7 +58,7 @@ def create_entry():
 
     entry = tk.Entry(root)
     entry.pack()
-    print(entry)
+    # print(entry)
 
 
 def create_label(text_to_display):
