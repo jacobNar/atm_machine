@@ -40,7 +40,7 @@ class Customer(object):
 
     @property
     def name(self):
-        """name accessor function"""
+        """Name accessor function"""
         return self._name
 
     @property
@@ -65,7 +65,6 @@ class Customer(object):
         self._card_id = card_id
         self._pin = pin
         self._accounts = accounts
-        # print(f"Customer created. Welcome, {name}!")
 
     def validate_card_id_pin(self, card_id, pin):
         """Validates whether card number and pin"""
