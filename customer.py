@@ -1,5 +1,26 @@
 # Customer module to handle customer information such as name, card number, pin, and account number
 
+customers = [
+    {
+        "name": "Homer Simpson",
+        "card_id": "1111111111",
+        "pin": "1111",
+        "accounts": [
+            "111111111101"
+            "111111111102"
+        ]
+    },
+    {
+        "name": "Peter Griffin",
+        "card_id": "2222222222",
+        "pin": "2222",
+        "accounts": [
+            "222222222201"
+            "222222222202"
+        ]
+    },
+]
+
 class Customer(object):
     """Customer class for ATM
 
