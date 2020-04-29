@@ -16,6 +16,7 @@ class Customer(object):
     _pin = None
     _account_number = None
     _is_validated = False  #session control: logged in with card/pin
+    _accounts = []
 
     @property
     def name(self):
@@ -47,14 +48,16 @@ class Customer(object):
 
     def logout(self):  # End session: used if data saved to database eventually
         """Calls destructor to end session"""
+        _is_validated = False
         del self
         
-    def __init__(self, name="", card_id="", pin="", account_number=""):
+    def __init__(self, name="", card_id="", pin="", account_number="", accounts = []):
         """Customer constructor: name, card_id, pin, account_number"""
         self._name = name
         self._card_id = card_id
         self._pin = pin
         self._account_number = account_number
+        self._accounts = accounts
         # print(f"Customer created. Welcome, {name}!")
 
     def validate_card_id_pin(self, card_id, pin):
@@ -65,3 +68,8 @@ class Customer(object):
         else:
             self._is_validated = False
             return False
+
+    
+    def get_accounts(self, _is_validated, accounts)
+        if self._is_validated == True:
+            return accounts
