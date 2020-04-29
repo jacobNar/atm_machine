@@ -69,7 +69,6 @@ class Customer(object):
             self._is_validated = False
             return False
 
-    
-    def get_accounts(self, _is_validated, accounts)
+    def get_accounts(self, name):
         if self._is_validated == True:
-            return accounts
+            return self._accounts
