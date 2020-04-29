@@ -69,6 +69,10 @@ class Customer(object):
             self._is_validated = False
             return False
 
-    def get_accounts(self, name):
+    def get_account_number(self, card_id):
+        if self._is_validated == True:
+            return self._account_number
+
+    def get_accounts(self, account_number):
         if self._is_validated == True:
             return self._accounts
