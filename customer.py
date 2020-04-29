@@ -76,3 +76,10 @@ class Customer(object):
     def get_accounts(self, account_number):
         if self._is_validated == True:
             return self._accounts
+
+    def add_account(self, account_number):
+        if self._is_validated == True:
+            self._accounts.append(self._account_number)
+            return True
+        else:
+            return False
