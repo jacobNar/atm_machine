@@ -28,7 +28,7 @@ class Customer(object):
         name (string): customer first/last name
         card_id (string): customer card number
         pin (string): customer pin
-        account_number (string): account number
+        accounts (list): list of account numbers
         is_validated (bool): card number and pin validation/session
 
     """
@@ -79,7 +79,7 @@ class Customer(object):
     def add_account(self, account_number):
         """Adds new account number to accounts"""
         if self._is_validated == True:
-            self._accounts.append(self._account_number)
+            self._accounts.append(account_number)
             return True
         else:
             return False
