@@ -40,34 +40,63 @@ class Customer(object):
 
     @property
     def name(self):
-        """Name accessor function"""
+        """Gets customer name
+
+        Returns:
+            name (string)
+        
+        """
         return self._name
 
     @property
     def is_validated(self):
-        """Session validation accessor function"""
+        """Gets session activity (logged in with pin)
+
+        Returns:
+            is_validated (bool)
+        
+        """
         return self._is_validated
 
     @property
     def accounts(self):
-        """Name accessor function"""
+        """"Gets list of accounts
+
+        Returns:
+            accounts (list)
+        
+        """
         if self._is_validated == True:
             return self._accounts
 
     def logout(self):  # End session: used if data saved to database eventually
         """Calls destructor to end session"""
-        _is_validated = False
+        self._is_validated = False
         del self
         
     def __init__(self, name="", card_id="", pin="", accounts = []):
-        """Customer constructor: name, card_id, pin, account_number"""
+        """Customer constructor: name, card_id, pin, accounts
+            name (string)
+            card_id (string)
+            pin (string)
+            accounts (list of strings)
+        """
         self._name = name
         self._card_id = card_id
         self._pin = pin
         self._accounts = accounts
 
     def validate_card_id_pin(self, card_id, pin):
-        """Validates whether card number and pin"""
+        """Validates whether card number and pin
+        
+        Args:
+            card_id (string): customer card id number
+            pin (string): customer pin
+
+        Returns:
+            True: if pin and card_id match account
+            False: if pin and card_id do not match account
+        """
         if card_id == self._card_id and pin == self._pin:
             self._is_validated = True
             return True
@@ -76,7 +105,16 @@ class Customer(object):
             return False
 
     def add_account(self, account_number):
-        """Adds new account number to accounts"""
+        """Adds new account number to accounts
+        
+        Args:
+            account_number (string): account number to be added to accounts
+
+        Returns:
+            True: if account number successfully added to accounts
+            False: if session is not validated and account number not added
+        
+        """
         if self._is_validated == True:
             self._accounts.append(account_number)
             return True
