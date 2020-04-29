@@ -120,13 +120,3 @@ class Customer(object):
             return True
         else:
             return False
-
-    # def get_account_number(self, card_id):
-    #     """Gets account number if card_id and pin are validated"""
-    #     if self._is_validated == True:
-    #         return self._account_number
-
-    # def get_accounts(self, card_id):
-    #     """Gets accounts if card_id and pin are validated"""
-    #     if self._is_validated == True:
-    #         return self._accounts

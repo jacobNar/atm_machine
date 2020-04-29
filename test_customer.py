@@ -1,9 +1,6 @@
 import pytest
 import customer
 
-if __name__ == "__main__":
-    customer = customer.Customer()
-
 def test_init():
     _customer = customer.Customer()
     assert _customer != None
