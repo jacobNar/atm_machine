@@ -2,72 +2,82 @@ import console as console_library
 
 
 def test_init():
-    console = console_library.Console(1111, 1, 0)
+    console = console_library.Console()
     assert console is not None
 
 
-def test_console_get_pin():
-    input_values = [1111]
+def test_get_pin():
+    console = console_library.Console()
+    input_values = ["1111"]
 
     def input(prompt=None):
         return input_values.pop()
 
     console_library.input = input
-    assert console_library.Console.console_get_pin() == 1111
+    assert console.get_pin() == "1111"
 
 
 def test_invalid_pin_over_four_digits_prints_string(capsys):
-    input_values = [999999]
+    console = console_library.Console()
+    input_values = ["999999", "9999"]
 
     def input(prompt=None):
-        return input_values.pop()
+        return input_values.pop(0)
 
-    console_library.Console.input = input
+    console_library.input = input
+    assert console.get_pin() == "9999"
+
     captured = capsys.readouterr()
-    assert captured.out == ""
+    assert "Invalid PIN" in captured.out
 
 
 def test_invalid_pin_under_four_digits_prints_string(capsys):
-    input_values = [1]
+    console = console_library.Console()
+    input_values = ["1", "1111"]
 
     def input(prompt=None):
-        return input_values.pop()
+        return input_values.pop(0)
 
-    console_library.Console.input = input
+    console_library.input = input
+    assert console.get_pin() == "1111"
+
     captured = capsys.readouterr()
-    assert captured.out == ""
+    assert "Invalid PIN" in captured.out
 
 
-def test_console_card_identification():
-    input_values = [123412341234]
+def test_get_card():
+    console = console_library.Console()
+    input_values = ["123412341234"]
 
     def input(prompt=None):
         return input_values.pop()
 
     console_library.input = input
-    assert console_library.Console.console_get_card_identification() == 123412341234
+    assert console.get_card() == "123412341234"
 
 
-def test_console_card_identification_string(capsys):
-    input_values = [123412341234]
+def test_get_card_string(capsys):
+    console = console_library.Console()
+    input_values = ["123412341234"]
 
     def input(prompt=None):
         return input_values.pop()
 
     console_library.input = input
-    console_library.Console.console_get_card_identification()
+    assert console.get_card() == "123412341234"
     captured = capsys.readouterr()
-    assert captured.out != "Valid card ID!"
+    assert "Valid card ID!" in captured.out 
 
 
 def test_console_display_menu_prints_string(capsys):
-    input_values = [1]
+    console = console_library.Console()
+    input_values = ["1", "100", "Y"]
 
-    def input():
-        return input_values.pop()
+    def input(prompt=None):
+        return input_values.pop(0)
 
-    console_library.Console.input = input
+    console_library.input = input
+    assert console.display_menu() == "1"
+
     captured = capsys.readouterr()
-    assert captured.out == ""
-
-
+    assert "Deposit verified!" in captured.out
