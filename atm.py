@@ -54,11 +54,3 @@ if __name__ == "__main__":
     print(atm.balance)
     atm.withdrawal(50)
     print(atm.balance)
-    
-            
-
-
-    
-            
-
-

@@ -19,11 +19,13 @@ def test_display_welcome(capsys):
 
 def test_balanace():
     atm = atm_library.Atm()
+    atm.log_in("1111111111", "1111")
 
-    assert atm.balance == None
+    assert atm.balance == 0
 
 def test_deposit():
     atm = atm_library.Atm()
+    atm.log_in("1111111111", "1111")
 
     atm.deposit(100)
     assert atm.balance == 100
