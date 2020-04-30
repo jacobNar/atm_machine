@@ -1,26 +1,5 @@
 # Customer module to handle customer information such as name, card number, pin, and account number
 
-customers = [
-    {
-        "name": "Homer Simpson",
-        "card_id": "1111111111",
-        "pin": "1111",
-        "accounts": [
-            "111111111101"
-            "111111111102"
-        ]
-    },
-    {
-        "name": "Peter Griffin",
-        "card_id": "2222222222",
-        "pin": "2222",
-        "accounts": [
-            "222222222201"
-            "222222222202"
-        ]
-    },
-]
-
 class Customer(object):
     """Customer class for ATM
 
@@ -32,11 +11,20 @@ class Customer(object):
         is_validated (bool): card number and pin validation/session
 
     """
+    _customers = []
     _name = None
     _card_id = None
     _pin = None
     _is_validated = False  #session control: logged in with card/pin
     _accounts = []
+
+    @property
+    def list(self):
+        result = "Name,Card,Pin,Accounts\n"
+        for customer in self._customers:
+            result += f"{customer['name']},{customer['card_id']}," \
+                f"{customer['pin']},{customer['accounts']}\n"
+        return result
 
     @property
     def name(self):
@@ -74,19 +62,21 @@ class Customer(object):
         self._is_validated = False
         del self
         
-    def __init__(self, name="", card_id="", pin="", accounts = []):
-        """Customer constructor: name, card_id, pin, accounts
-            name (string)
-            card_id (string)
-            pin (string)
-            accounts (list of strings)
-        """
-        self._name = name
-        self._card_id = card_id
-        self._pin = pin
-        self._accounts = accounts
+    def __init__(self):
+        self.add("Homer Simpson", "1111111111", "1111", "111111111101,111111111102")
+        self.add("Peter Griffin", "2222222222", "2222", "222222222201,222222222202")
+        self.validate("1111111111", "1111")
 
-    def validate_card_id_pin(self, card_id, pin):
+    def add(self, name="", card_id="", pin="", accounts=""):
+        customer = {
+            "name": name,
+            "card_id": card_id,
+            "pin": pin,
+            "accounts": accounts.replace(" ", "").split(",")
+        }
+        self._customers.append(customer)
+
+    def validate(self, card_id, pin):
         """Validates whether card number and pin
         
         Args:
@@ -97,12 +87,22 @@ class Customer(object):
             True: if pin and card_id match account
             False: if pin and card_id do not match account
         """
-        if card_id == self._card_id and pin == self._pin:
-            self._is_validated = True
-            return True
-        else:
-            self._is_validated = False
-            return False
+        self._name = None
+        self._card_id = None
+        self._pin = None
+        self._accounts = None
+        self._is_validated = False
+
+        for customer in self._customers:
+            if card_id == customer["card_id"] and pin == customer["pin"]:
+                self._name = customer["name"]
+                self._card_id = card_id
+                self._pin = pin
+                self._accounts = customer["accounts"]
+                self._is_validated = True
+                return True
+
+        return False
 
     def add_account(self, account_number):
         """Adds new account number to accounts
@@ -120,3 +120,7 @@ class Customer(object):
             return True
         else:
             return False
+
+if __name__ == "__main__":
+    customer = Customer()
+    print(customer.list)
