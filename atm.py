@@ -1,64 +1,60 @@
 # This is the main ATM program, this will call all other classes and modules.
 
+import account
+import customer
+
 # import session as session_library
 # import card_reader as card_reader_library
-# import customer_console as customer_console_library
+# import console
 # import operator_panel as operator_panel_library
 # import log
-# import account as acount_library
 # import network as network_library
 # import receipt as receipt_library
 
 class Atm(object):
     _id = "12345"
+    _account = None
+    _customer = None
 
-    # @property
-    # def id(self):
-    #     return self._id
+    @property
+    def id(self):
+        return self._id
 
-    # @property
-    # def card_number(self):
-    #     return self.card_number
-    
-    # @card_number.setter
-    # def card_number(self):
-    #     self.card_number = self.read_card()
+    @property
+    def balance(self):
+        return self._account.balance
 
     def __init__(self):
         print("Atm initialized")
         self.display_welcome()
 
     def display_welcome(self):
-        # console = console_library.Console()
+        # This should be a console.welcome rather than a direct print.
         print("Welcome to our very expensive bank!")
 
-    # def read_card(self):
-    #     return card_reader_library.get_card()
-
-    # def start_session(self):
-    #     self.session = session_library.Session(self._id, self.card_number)
-    #     print("Session started.")
-
-    # def end_session(self):
-    #     self.session.end_session(self.session)
-    #     print("Session Ended.")
+    def deposit(self, deposit):
+        self._account.deposit(deposit)
     
-    # def start_customer_console(self):
-    #     self.customer_console = customer_console_library.Console()
-    #     print("Console started.")
-    
-    # def get_action(self):
-    #     self.action = self.customer_console.get_action()
+    def log_in(self, card_id, pin):
+        self._customer = customer.Customer()
+        self._customer.validate(card_id, pin)
+        self._account = account.Account()
 
-    # def deposit_withdrawal_transfer(self):
-    #     if self.action == "deposit":
-    #         account.deposit()
-    #     elif self.action == "withdrawal":
-    #         account.withdrawal()
-    #     elif self.actioin == "transfer":
-    #         account.transfer()
-    #     else:
-    #         print("Invalid action, please try again.")
+
+    def withdrawal(self, withdrawal):
+        self._account.withdrawal(withdrawal)
+    
+
+if __name__ == "__main__":
+    """ testing """
+    atm = Atm()
+    atm.log_in("1111111111", "1111")
+
+    atm.deposit(100)
+    print(atm.balance)
+    atm.withdrawal(50)
+    print(atm.balance)
+    
             
 
 

@@ -4,9 +4,10 @@ import atm as atm_library
 
 if __name__ == "__main__":
     atm = atm_library.Atm()
-    # atm.read_card()    
-    # atm.start_session(atm._id, atm.card_number)
-    # atm.start_customer_console()
-    # atm.get_action()
-    # deposit_withdrawal_transfer()
+    atm.deposit(100)
+    print(atm.balance)
+    print(vars(atm))
+    print(vars(atm._account))
+    print(atm.balance)
+
     time.sleep(1)
