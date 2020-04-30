@@ -109,8 +109,11 @@ def submit_customer_info(name, card_id, pin, accounts):
     Returns: none
 
     """
-
-    customer.Customer.add(name.get(), card_id.get(), pin.get(), accounts.get())
+    keys = ["name", "card_id", "pin", "accounts"]
+    elements = [name.get(), card_id.get(), pin.get(), accounts.get()]
+    custdict = dict(zip(keys, elements))
+    #print(custdict)
+    customer.Customer.add(custdict)
     tkinter.messagebox.showinfo(title="Notification", message="Customer Successfully Registered!")
 
 
