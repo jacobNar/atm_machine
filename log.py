@@ -23,26 +23,28 @@ class Log(object):
         fieldID = get_dictionary("SELECT COUNT(*) FROM Log")
         fieldID = int(fieldID["Rows"][0][0])
         fieldID += 1
-        date_and_time = datetime.now()
+        date_and_time = str(datetime.now())
+        date_and_time = date_and_time[0:19]
         sql = "INSERT INTO Log('FieldID', DateTime, Text) VALUES('"
         sql = sql + str(fieldID) + "', '" + str(date_and_time) + "', '" + str(entry) + "');"
         results = execute_sql(sql)
         return results
-    
-    
-    def display_entry(self):
+
+
+    def show(self):
         """Displays all the records of the log.
 
         Args:
             None
 
         Returns:
-            None
+            A string with the table of entries
         """
         sql = "SELECT * from Log"
         list_of_dictionaries = get_dictionary(sql)
-        print("\nThe log entries are:\n")
-        display_table(list_of_dictionaries)
+        string = return_table(list_of_dictionaries)
+        print(string)
+        return string
 
 
 def execute_sql(sql):
@@ -124,14 +126,14 @@ def get_dictionary(sql):
                 loop_count += 1
             dictionary["Rows"] = rows_contents
         else:
-            dictionary = "Database missing."
+            dictionary = "Database empty."
     except Exception as exception:
             print("Error processing %s" % sql)
             print(exception)
     finally:
         connection.close()
     if dictionary == {}:
-        dictionary = "Database missing."
+        dictionary = "Database empty."
     return dictionary
 
 
@@ -175,7 +177,7 @@ def attach_column_widths(dictionary_of_lists):
     return dictionary_of_lists
 
 
-def display_table(dictionary_of_lists):
+def return_table(dictionary_of_lists):
     """Prints the information from the dictionary in a table.
     
     Args:
@@ -183,7 +185,7 @@ def display_table(dictionary_of_lists):
         answer: The table selected by the user.
     
     Returns:
-        The dictionary of lists with an extra entry with the column widths.
+        The dictionary of lists with an extra entry with the column widths if database is not empty.
 
     Raises:
         AssertionError: If dictionary_of_lists is not a dictionary.
@@ -194,6 +196,8 @@ def display_table(dictionary_of_lists):
         AssertionError: If 'Column Widths' key does not access a list.
         AssertionError: If 'Column Widths' key does not access a list of integers.
     """
+    if dictionary_of_lists == "Database empty.":
+        return dictionary_of_lists
     assert isinstance(dictionary_of_lists, dict), "'dictionary_of_lists ' must be a dictionary."
     assert isinstance(dictionary_of_lists["Headings"], list), "'Headings' key should access a list."
     assert isinstance(dictionary_of_lists["Rows"], list), "'Rows' key should access a list."
@@ -204,12 +208,14 @@ def display_table(dictionary_of_lists):
     dictionary_of_lists = attach_column_widths(dictionary_of_lists)
     assert isinstance(dictionary_of_lists["Column Widths"], list), "'Column Widths' key should access a list."
     assert isinstance(dictionary_of_lists["Column Widths"][0], int), "'Column Widths' key should access a list of integers."
+
+    string = ""
     while loop_count < len(dictionary_of_lists["Headings"]):
         instance_heading = str(dictionary_of_lists["Headings"][loop_count])
         instance_column_width = int(dictionary_of_lists["Column Widths"][loop_count])
         top_row += f"{instance_heading:{instance_column_width}}"
         loop_count += 1
-    print(top_row)
+    string = string + str(top_row) + "\n"
 
     loop_count = 0
     while loop_count < len(dictionary_of_lists["Rows"]):
@@ -223,12 +229,12 @@ def display_table(dictionary_of_lists):
             instance_column_width = int(dictionary_of_lists["Column Widths"][small_loop])
             row += f"{instance_row:{instance_column_width}}"
             small_loop += 1
-        print(row)
+        string = string + str(row) + "\n"
         loop_count += 1
-    return loop_count
+    return string
 
 
 if __name__ == "__main__":
     entry = "Description of changed aspect"
-    Log().save(entry)
-    Log().display_entry()
+    Log().show()
+#    Log().save(entry)
