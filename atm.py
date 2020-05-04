@@ -13,7 +13,7 @@ import console as console_library
 
 class Atm(object):
     _id = "12345"
-    _account = None
+    _account = account.Account()
     _customer = None
     _console = console_library.Console()
     _card = None
@@ -37,8 +37,7 @@ class Atm(object):
         self._card = self._console.get_card()
         self._pin = self._console.get_pin()
         self.display_menu()
-        
-        
+    
     def deposit(self, deposit):
         self._account.deposit(deposit)
     
@@ -53,15 +52,16 @@ class Atm(object):
     def display_menu(self):
         choice = self._console.display_menu()
         print(choice)
-        if(choice[0] == 1):
+
+        if(choice[0] == "1"):
             self.deposit(choice[1])
-            print(self.balance)
-        elif(choice[0] == 2):
+            print("Balance:" , self.balance)
+        elif(choice[0] == "2"):
             self.withdrawal(choice[1])
-            print(self.balance)
-        elif(choice[0] == 3):
+            print("Balance:" , self.balance)
+        elif(choice[0] == "3"):
             # self.transfer(self._choice[1])
-            print(self.balance)
+            print("Balance:" , self.balance)
         
 
     

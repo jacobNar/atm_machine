@@ -65,38 +65,36 @@ class Console(object):
                 verify_deposit = input("Is this the correct amount, Yes or No?:  " + '$' + str(deposit))
                 if verify_deposit == "Y" or verify_deposit == "y":
                     print("Deposit verified!")
-                    break
                 else:
                     print("Incorrect deposit amount")
                     continue
-                choice = [choice, deposit]
-                return choice
+                choices = [choice, deposit]
+                return choices
 
             elif choice == "2":
                 withdraw = float(input("Enter amount to withdraw: "))
                 verify_withdraw = input("Is this the correct amount, Yes or No?: " + '$' + str(withdraw))
                 if verify_withdraw == "Y" or verify_withdraw == "y":
                     print("Withdraw verified!")
-                    break
                 else:
                     print("Incorrect withdraw amount")
                     continue
 
-                choice = [choice, withdraw]
-                return choice
+                choices = [choice, withdraw]
+                return choices
 
             elif choice == "3":
                 transfer = float(input("Enter amount to transfer: "))
                 verify_transfer = input("Is this the correct amount, Yes or No?: " + '$' + str(transfer))
                 if verify_transfer == "Y" or verify_transfer == "y":
                     print("Transfer verified!")
-                    break
+                    
                 else:
                     print("Incorrect transfer amount")
                     continue
 
-                choice = [choice, transfer]
-                return choice
+                choices = [choice, transfer]
+                return choices
 
         self._choice = choice
 
