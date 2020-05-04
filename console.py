@@ -69,6 +69,9 @@ class Console(object):
                 else:
                     print("Incorrect deposit amount")
                     continue
+                choice = [choice, deposit]
+                return choice
+
             elif choice == "2":
                 withdraw = float(input("Enter amount to withdraw: "))
                 verify_withdraw = input("Is this the correct amount, Yes or No?: " + '$' + str(withdraw))
@@ -78,6 +81,10 @@ class Console(object):
                 else:
                     print("Incorrect withdraw amount")
                     continue
+
+                choice = [choice, withdraw]
+                return choice
+
             elif choice == "3":
                 transfer = float(input("Enter amount to transfer: "))
                 verify_transfer = input("Is this the correct amount, Yes or No?: " + '$' + str(transfer))
@@ -87,8 +94,11 @@ class Console(object):
                 else:
                     print("Incorrect transfer amount")
                     continue
+
+                choice = [choice, transfer]
+                return choice
+
         self._choice = choice
-        return self.choice
 
 
 if __name__ == "__main__":
