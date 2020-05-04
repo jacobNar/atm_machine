@@ -31,13 +31,13 @@ class Atm(object):
         print("Atm initialized")
         self.display_welcome()
 
-        
-
     def display_welcome(self):
         # This should be a console.welcome rather than a direct print.
         print("Welcome to our very expensive bank!")
         self._card = self._console.get_card()
         self._pin = self._console.get_pin()
+        self.display_menu()
+        
         
     def deposit(self, deposit):
         self._account.deposit(deposit)
@@ -49,6 +49,20 @@ class Atm(object):
 
     def withdrawal(self, withdrawal):
         self._account.withdrawal(withdrawal)
+
+    def display_menu(self):
+        choice = self._console.display_menu()
+        print(choice)
+        if(choice[0] == 1):
+            self.deposit(choice[1])
+            print(self.balance)
+        elif(choice[0] == 2):
+            self.withdrawal(choice[1])
+            print(self.balance)
+        elif(choice[0] == 3):
+            # self.transfer(self._choice[1])
+            print(self.balance)
+        
 
     
 
