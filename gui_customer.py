@@ -26,7 +26,7 @@ def create_root():
     global root
 
     root = tkinter.Tk()
-    root.title("Welcom to New Customer Registration")
+    root.title("Welcome to New Customer Registration")
 
 
 def create_canvas():
@@ -59,6 +59,7 @@ def create_label(text, rel_x, rel_y, rel_height, rel_width, b_g):
         None
 
     """
+    
     label = tkinter.Label(root, text = text, font=("Helvetica", 16), bg=b_g)
     label.place(relx=rel_x, rely=rel_y, relheight=rel_height, relwidth=rel_width)
 
@@ -112,10 +113,12 @@ def submit_customer_info(name, card_id, pin, accounts):
     keys = ["name", "card_id", "pin", "accounts"]
     elements = [name.get(), card_id.get(), pin.get(), accounts.get()]
     custdict = dict(zip(keys, elements))
+    # customer.Customer(name.get(), card_id.get(), pin.get(), accounts.get())
     # print(custdict)
     customer.Customer.add(custdict)
     # also needs to call Account constructor and log eventually
-    tkinter.messagebox.showinfo(title="Notification", message="Customer Successfully Registered!")
+    tkinter.messagebox.showinfo(title="Notification", 
+                                message="Customer Successfully Registered!")
 
 
 def main():
